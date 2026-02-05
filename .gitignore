@@ -1,2 +1,4 @@
 # virtual environement
 .venv/
+# Help file
+HELP.md
