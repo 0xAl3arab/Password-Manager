@@ -37,14 +37,19 @@ class LoginPage(QMainWindow):
         username_layout.setContentsMargins(0,0,0,0)
 
         # Password row
-        password_input = QLineEdit()
-        password_input.setFixedSize(INPUT_WIDTH, INPUT_HEIGHT)
-        show_password_button = QPushButton("show")
-        show_password_button.setFixedSize(40, BUTTON_HEIGHT)
+        self.password_input = QLineEdit()
+        self.password_input.setFixedSize(INPUT_WIDTH, INPUT_HEIGHT)
+        self.show_password_button = QPushButton(self)
+        self.show_password_button.setText("show")
+        self.show_password_button.setCheckable(True)
+
+        self.show_password_button.toggled.connect(self.show_password_button_toggled)
+        
+        self.show_password_button.setFixedSize(40, BUTTON_HEIGHT)
         password_widget = QWidget()
         password_layout = QHBoxLayout()
-        password_layout.addWidget(password_input)
-        password_layout.addWidget(show_password_button)
+        password_layout.addWidget(self.password_input)
+        password_layout.addWidget(self.show_password_button)
         password_widget.setLayout(password_layout)
         form_layout.addRow("Master password:", password_widget)
         password_layout.setContentsMargins(0,0,0,0)
@@ -63,8 +68,21 @@ class LoginPage(QMainWindow):
         main_layout.addStretch()
         main_layout.addWidget(form_widget, alignment=Qt.AlignHCenter)
         main_layout.addStretch()
+    
 
+    def show_password_button_toggled(self):
+        btn = self.show_password_button
+        state = btn.isChecked()
+        if state==True:
+            btn.setText("hide")
+            self.password_input.setEchoMode(QLineEdit.Password)
+        else:
+            btn.setText("show")
+            self.password_input.setEchoMode(QLineEdit.Normal)
+            
 
+            
+            
 app = QApplication(sys.argv)
 window = LoginPage()
 window.show()
