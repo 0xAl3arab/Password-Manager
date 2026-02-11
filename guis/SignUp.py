@@ -13,17 +13,28 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("FastPass - SignUp")
         self.setGeometry(700,300,500,500)
         self.setWindowIcon(QIcon('../Assets/1849-logo-1713617130.076color-00a3e4.svg'))
-        self.setFixedSize(500,500)
+
         label = QLabel("Sign Up",self)
-        label.setGeometry(0,40,500,500)
+        label.setGeometry(0,90,500,500)
         label.setAlignment(Qt.AlignHCenter)
         label.setStyleSheet("color:blue;"
                             "font-size:35px;"
                             "font-family:Arial;"
                             "font-weight:bold;"
                             "font-style:italic;")
+        logolabel = QLabel(self)
+        logolabel.setGeometry(100,0,90,90)
+        logo = QPixmap("../Assets/1849-logo-1713617130.076color-00a3e4.svg")
+        logolabel.setPixmap(logo)
+        logolabel.setScaledContents(True)
+
+        nameLabel = QLabel("FastPass",self)
+        nameLabel.setGeometry(180,5,500,90)
+        nameLabel.setStyleSheet("font-size:50px;")
+
         Username = QLabel("Username",self)
         Username.setGeometry(50,170,50,50)
+
 
         inputUser = QLineEdit(self)
         inputUser.setGeometry(150,180,220,30)
