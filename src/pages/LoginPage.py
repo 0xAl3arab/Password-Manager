@@ -56,22 +56,21 @@ class LoginPage(QMainWindow):
 
         #option to create new account
         button_text = "create new one"
-        create_account_button = QPushButton(button_text)
-        create_account_button.setFlat(True)
-        create_account_button.setFixedSize(BUTTON_WIDTH-35,BUTTON_HEIGHT)
+        self.create_account_button = QPushButton(button_text)
+        self.create_account_button.setFlat(True)
+        self.create_account_button.setFixedSize(BUTTON_WIDTH-30,BUTTON_HEIGHT)
         create_account_text = QLabel()
         create_account_text.setText("don't have an account ?")
-        create_account_text.setFixedSize(BUTTON_WIDTH-5,BUTTON_HEIGHT)
+        create_account_text.setFixedSize(BUTTON_WIDTH+15,BUTTON_HEIGHT)
 
 
         create_account_widget = QWidget()
         create_account_layout = QHBoxLayout()
         create_account_layout.addStretch(1)
         create_account_layout.addWidget(create_account_text)
-        create_account_layout.addWidget(create_account_button)
+        create_account_layout.addWidget(self.create_account_button)
         create_account_layout.addStretch(1)
 
-        create_account_layout.setSpacing(0)
         create_account_layout.setContentsMargins(25,0,0,0)
 
         create_account_widget.setLayout(create_account_layout)

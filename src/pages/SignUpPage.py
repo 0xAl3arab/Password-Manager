@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap , QFont
 import Db.DbConnection as Db
 
-class MainWindow(QMainWindow):
+class SignUpPage(QMainWindow):
 
 
     def __init__(self):
@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
 def main():
     Db.start_db()
     app = QApplication(sys.argv)
-    window = MainWindow()
+    window = SignUpPage()
     window.show()
     sys.exit(app.exec_())
 
