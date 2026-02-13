@@ -106,5 +106,5 @@ def main():
     sys.exit(app.exec_())
 
 
-
-main()
+if __name__=="__main__":
+    main()
