@@ -103,11 +103,16 @@ class LoginPage(QMainWindow):
         else:
             btn.setText("show")
             self.password_input.setEchoMode(QLineEdit.Normal)
-            
 
-            
-            
-app = QApplication(sys.argv)
-window = LoginPage()
-window.show()
-app.exec()
+
+
+def main():
+    app = QApplication(sys.argv)
+    window = LoginPage()
+    window.show()
+    app.exec()
+
+
+
+if __name__=="__main__":
+    main()
