@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QFormLayout, QLineEdit, QVBoxLayout, QHBoxLayout, QLabel
-from PyQt5.QtCore import QSize, Qt 
+from PyQt5.QtCore import QSize, Qt ,pyqtSignal
 import sys
 
 WINDOW_WIDTH = 550
@@ -10,6 +10,11 @@ BUTTON_WIDTH = 120
 BUTTON_HEIGHT = 30
 
 class LoginPage(QMainWindow):
+
+    #-----------Signals----------
+    create_account_signal= pyqtSignal()    
+
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Login")
@@ -59,6 +64,9 @@ class LoginPage(QMainWindow):
         self.create_account_button = QPushButton(button_text)
         self.create_account_button.setFlat(True)
         self.create_account_button.setFixedSize(BUTTON_WIDTH-30,BUTTON_HEIGHT)
+
+        self.create_account_button.clicked.connect(self.create_account_clicked)
+
         create_account_text = QLabel()
         create_account_text.setText("don't have an account ?")
         create_account_text.setFixedSize(BUTTON_WIDTH+15,BUTTON_HEIGHT)
@@ -92,7 +100,6 @@ class LoginPage(QMainWindow):
         main_layout.addStretch()
         main_layout.addWidget(form_widget, alignment=Qt.AlignHCenter)
         main_layout.addStretch()
-    
 
     def show_password_button_toggled(self):
         btn = self.show_password_button
@@ -103,6 +110,10 @@ class LoginPage(QMainWindow):
         else:
             btn.setText("show")
             self.password_input.setEchoMode(QLineEdit.Normal)
+
+    def create_account_clicked(self):
+        self.create_account_signal.emit()
+
 
 
 

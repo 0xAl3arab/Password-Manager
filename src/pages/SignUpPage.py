@@ -13,7 +13,7 @@ class SignUpPage(QMainWindow):
         super().__init__()
         self.setWindowTitle("FastPass - SignUp")
         self.setGeometry(700,300,500,500)
-        self.setWindowIcon(QIcon('../Assets/1849-logo-1713617130.076color-00a3e4.svg'))
+        self.setWindowIcon(QIcon('Assets/1849-logo-1713617130.076color-00a3e4.svg'))
         self.setFixedSize(500,500)
         label = QLabel("Sign Up",self)
         label.setGeometry(0,90,500,500)

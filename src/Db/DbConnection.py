@@ -3,7 +3,7 @@ import sqlite3
 
 class DbConnection:
     def __init__(self):
-        self.connection = sqlite3.connect('../Db/fastpass.db')
+        self.connection = sqlite3.connect('data/fastpass.db')
         self.cursor = self.connection.cursor()
         self.commit = self.connection.commit()
 
