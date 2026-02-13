@@ -3,3 +3,5 @@
 # Help file
 HELP.md
 test.py
+#IDE files
+.idea/
