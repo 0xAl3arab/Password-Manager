@@ -5,4 +5,7 @@ HELP.md
 test.py
 #IDE files
 .idea/
+#pycache
+__pycache__/
+*.py[cod]
 
