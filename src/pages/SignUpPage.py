@@ -104,7 +104,8 @@ class MainWindow(QMainWindow):
         if (dbconn.cursor.execute(("select username from USERS where user = ?"), username)):
             self.problabel.setText("Username already exists")
         else:
-            dbconn.conn.cursor().execute(("insert into USERS (username, password) values (?, ?)"), username, password)
+            user = (username, password)
+            dbconn.conn.cursor().execute(("insert into USERS (username, password) values (?, ?)"),user)
             dbconn.commit()
             print("User created successfully")
 
