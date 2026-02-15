@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("FastPass - SignUp")
         self.setGeometry(700, 300, 500, 500)
-        self.setWindowIcon(QIcon('../Assets/1849-logo-1713617130.076color-00a3e4.svg'))
+        self.setWindowIcon(QIcon('../../Assets/1849-logo-1713617130.076color-00a3e4.svg'))
         self.setFixedSize(500, 500)
         label = QLabel("Sign Up", self)
         label.setGeometry(0, 90, 500, 500)
@@ -28,7 +28,7 @@ class MainWindow(QMainWindow):
                             "font-style:italic;")
         logolabel = QLabel(self)
         logolabel.setGeometry(100, 0, 90, 90)
-        logo = QPixmap("../Assets/1849-logo-1713617130.076color-00a3e4.svg")
+        logo = QPixmap("../../Assets/1849-logo-1713617130.076color-00a3e4.svg")
         logolabel.setPixmap(logo)
         logolabel.setScaledContents(True)
 
@@ -72,7 +72,17 @@ class MainWindow(QMainWindow):
         self.checkregulation = QCheckBox("Notice !", self)
         self.checkregulation.setGeometry(130, 350, 220, 30)
 
-
+        self.login_page = QLabel("I already have an account",self)
+        self.login_page.mousePressEvent = self.open_login_page
+        self.login_page.setGeometry(0, 420, 500, 100)
+        self.login_page.setAlignment(Qt.AlignCenter)
+        self.login_page.setStyleSheet("""
+            QLabel:hover{
+                color: blue;
+                cursor: pointer;
+            }
+        """)
+        self.login_page.setCursor(Qt.PointingHandCursor)
 
         self.checkregulation.setStyleSheet("color : red ;")
         label2 = QLabel(": If you forget the password you are COOKED  \n you cannot recover it save it somewhere buddy",
