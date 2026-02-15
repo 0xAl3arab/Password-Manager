@@ -105,16 +105,11 @@ class MainWindow(QMainWindow):
             return
         user = (username, password)
         dbconn.cursor.execute("INSERT INTO Users (username, password) VALUES (?, ?)", user)
-        dbconn.commit
+        dbconn.commit()
+
         dbconn.cursor.execute("SELECT * FROM Users")
-        res=dbconn.cursor.fetchone()
+        res=dbconn.cursor.fetchall()
         print(res)
-
-
-
-
-
-
 
 
 
