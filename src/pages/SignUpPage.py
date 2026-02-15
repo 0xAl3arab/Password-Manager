@@ -97,17 +97,25 @@ class MainWindow(QMainWindow):
         username = self.inputUser.text()
         password = self.inputPass.text()
         confimPass = self.inputCrPass.text()
-
+        print(username)
+        print(password)
+        print(confimPass)
         if (password != confimPass):
             self.problabel.setText("Passwords do not match")
+            return
+        user = (username, password)
+        dbconn.cursor.execute("INSERT INTO Users (username, password) VALUES (?, ?)", user)
+        dbconn.commit
+        dbconn.cursor.execute("SELECT * FROM Users")
+        res=dbconn.cursor.fetchone()
+        print(res)
 
-        if (dbconn.cursor.execute(("select username from USERS where user = ?"), username)):
-            self.problabel.setText("Username already exists")
-        else:
-            user = (username, password)
-            dbconn.conn.cursor().execute(("insert into USERS (username, password) values (?, ?)"),user)
-            dbconn.commit()
-            print("User created successfully")
+
+
+
+
+
+
 
 
 def main():
