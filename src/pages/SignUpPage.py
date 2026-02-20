@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QCheckBox, QPushButton
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap, QFont
+from PyQt5.QtGui import QPixmap
 import Db.DbConnection as Db
 from pages.LoginPage import LoginPage
 
@@ -73,7 +73,7 @@ class MainWindow(QMainWindow):
         self.checkregulation.setGeometry(130, 350, 220, 30)
 
         self.login_page = QLabel("I already have an account",self)
-        self.login_page.mousePressEvent = self.open_login_page
+        #
         self.login_page.setGeometry(0, 420, 500, 100)
         self.login_page.setAlignment(Qt.AlignCenter)
         self.login_page.setStyleSheet("""
@@ -110,25 +110,37 @@ class MainWindow(QMainWindow):
         username = self.inputUser.text()
         password = self.inputPass.text()
         confimPass = self.inputCrPass.text()
-        print(username)
+
+        """print(username)
         print(password)
-        print(confimPass)
+        print(confimPass)"""
+
         if (password != confimPass):
             self.problabel.setText("Passwords do not match")
             return
+
+
         user = (username, password)
-        dbconn.cursor.execute("INSERT INTO Users (username, password) VALUES (?, ?)", user)
-        dbconn.commit()
 
-        dbconn.cursor.execute("SELECT * FROM Users")
+        check = dbconn.cursor.execute("select * from USERS where username = ?", (username,))
+        #in the arguments of the function you must make the entry as a tuple
+        res = check.fetchall()
+
+        if (res is None):
+            dbconn.cursor.execute("INSERT INTO Users (username, password) VALUES (?, ?)", user)
+            dbconn.commit()
+        else:
+            self.problabel.setText("Username already exists")
+
+        """dbconn.cursor.execute("SELECT * FROM Users")
         res=dbconn.cursor.fetchall()
-        print(res)
-        dbconn.close_connection()
+        print(res)"""
 
-    def open_login_page(self, event):
+
+    """def open_login_page(self, event):
         self.close()
         self.login_window = LoginPage()
-        self.login_window.show()
+        self.login_window.show()"""
 
 
 def main():
