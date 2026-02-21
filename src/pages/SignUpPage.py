@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 import Db.DbConnection as Db
 from pages.LoginPage import LoginPage
-
+import bcrypt
 dbconn = Db.DbConnection()
 
 
@@ -73,13 +73,12 @@ class MainWindow(QMainWindow):
         self.checkregulation.setGeometry(130, 350, 220, 30)
 
         self.login_page = QLabel("I already have an account",self)
-        #
+        self.login_page.mousePressEvent = self.open_login_page
         self.login_page.setGeometry(0, 420, 500, 100)
         self.login_page.setAlignment(Qt.AlignCenter)
         self.login_page.setStyleSheet("""
             QLabel:hover{
                 color: blue;
-                cursor: pointer;
             }
         """)
         self.login_page.setCursor(Qt.PointingHandCursor)
@@ -119,28 +118,33 @@ class MainWindow(QMainWindow):
             self.problabel.setText("Passwords do not match")
             return
 
-
-        user = (username, password)
+        bytes = password.encode("utf-8")
+        salt = bcrypt.gensalt()
+        psw = bcrypt.hashpw(bytes, salt)
+        user = (username, psw)
 
         check = dbconn.cursor.execute("select * from USERS where username = ?", (username,))
         #in the arguments of the function you must make the entry as a tuple
-        res = check.fetchall()
+        res = check.fetchone()
 
         if (res is None):
             dbconn.cursor.execute("INSERT INTO Users (username, password) VALUES (?, ?)", user)
             dbconn.commit()
+            self.problabel.setText("Account created successfully")
+            self.close()
+            self.login_window = LoginPage()
         else:
             self.problabel.setText("Username already exists")
 
-        """dbconn.cursor.execute("SELECT * FROM Users")
+        dbconn.cursor.execute("SELECT * FROM Users")
         res=dbconn.cursor.fetchall()
-        print(res)"""
+        print(res)
 
 
-    """def open_login_page(self, event):
+    def open_login_page(self, event):
         self.close()
         self.login_window = LoginPage()
-        self.login_window.show()"""
+        self.login_window.show()
 
 
 def main():
