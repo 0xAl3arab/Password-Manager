@@ -51,6 +51,9 @@ class MainWindow(QMainWindow):
 
         ConfirmPassword = QLabel("Confirm Password", self)
         ConfirmPassword.setGeometry(50, 280, 300, 50)
+
+
+
         self.setStyleSheet("""
 
             QLineEdit {
@@ -69,6 +72,26 @@ class MainWindow(QMainWindow):
 
         self.inputCrPass = QLineEdit(self)
         self.inputCrPass.setGeometry(150, 290, 220, 30)
+
+        self.inputPass.setEchoMode(QLineEdit.Password)
+        self.inputCrPass.setEchoMode(QLineEdit.Password)
+
+        self.show_hidePass = QLabel(self)
+        self.show_hidePass.setGeometry(400, 235, 20, 20)
+        eye = QPixmap("../../Assets/eye-password-show.svg")
+        self.show_hidePass.setPixmap(eye)
+        self.show_hidePass.setScaledContents(True)
+
+
+        self.show_hidePassCr = QLabel(self)
+        self.show_hidePassCr.setGeometry(400, 295, 20, 20)
+        self.show_hidePassCr.setPixmap(eye)
+        self.show_hidePassCr.setScaledContents(True)
+        self.show_hidePass.mousePressEvent = self.toggle_password
+        self.show_hidePassCr.mousePressEvent = self.toggle_password_confirm
+
+
+
 
         self.checkregulation = QCheckBox("Notice !", self)
         self.checkregulation.setGeometry(130, 350, 220, 30)
@@ -105,6 +128,22 @@ class MainWindow(QMainWindow):
             self.submitbutton.setDisabled(False)
         else:
             self.submitbutton.setDisabled(True)
+
+    def toggle_password(self, event):
+        if self.inputPass.echoMode() == QLineEdit.Password:
+            self.inputPass.setEchoMode(QLineEdit.Normal)
+            self.show_hidePass.setPixmap(QPixmap("../../Assets/eye-password-see-view.svg"))
+        else:
+            self.inputPass.setEchoMode(QLineEdit.Password)
+            self.show_hidePass.setPixmap(QPixmap("../../Assets/eye-password-show.svg"))
+
+    def toggle_password_confirm(self, event):
+        if self.inputCrPass.echoMode() == QLineEdit.Password:
+            self.inputCrPass.setEchoMode(QLineEdit.Normal)
+            self.show_hidePassCr.setPixmap(QPixmap("../../Assets/eye-password-see-view.svg"))
+        else:
+            self.inputCrPass.setEchoMode(QLineEdit.Password)
+            self.show_hidePassCr.setPixmap(QPixmap("../../Assets/eye-password-show.svg"))
 
     def sign_up(self):
         username = self.inputUser.text()
@@ -151,6 +190,8 @@ class MainWindow(QMainWindow):
         self.close()
         self.login_window = LoginPage()
         self.login_window.show()
+
+
 
 
 def main():
