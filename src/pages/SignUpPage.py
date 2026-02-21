@@ -1,8 +1,9 @@
 import sys
+import time
 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QCheckBox, QPushButton
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt ,QTimer
 from PyQt5.QtGui import QPixmap
 import Db.DbConnection as Db
 from pages.LoginPage import LoginPage
@@ -131,8 +132,8 @@ class MainWindow(QMainWindow):
             dbconn.cursor.execute("INSERT INTO Users (username, password) VALUES (?, ?)", user)
             dbconn.commit()
             self.problabel.setText("Account created successfully")
-            self.close()
-            self.login_window = LoginPage()
+            QTimer.singleShot(2000,self.loginpage)
+
         else:
             self.problabel.setText("Username already exists")
 
@@ -140,7 +141,12 @@ class MainWindow(QMainWindow):
         res=dbconn.cursor.fetchall()
         print(res)
 
-
+    #going automatically after sign up
+    def loginpage(self):
+        self.close()
+        self.login_window = LoginPage()
+        self.login_window.show()
+    #for the button already have an account
     def open_login_page(self, event):
         self.close()
         self.login_window = LoginPage()
