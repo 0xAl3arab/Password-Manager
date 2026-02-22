@@ -11,7 +11,7 @@ import bcrypt
 dbconn = Db.DbConnection()
 
 
-class MainWindow(QMainWindow):
+class SignUpPage(QMainWindow):
 
     def __init__(self):
         super().__init__()
