@@ -198,7 +198,7 @@ class SignUpPage(QMainWindow):
 def main():
     Db.start_db()
     app = QApplication(sys.argv)
-    window = MainWindow()
+    window = SignUpPage()
     window.show()
     sys.exit(app.exec_())
 
