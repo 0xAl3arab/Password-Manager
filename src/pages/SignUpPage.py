@@ -129,6 +129,7 @@ class MainWindow(QMainWindow):
         else:
             self.submitbutton.setDisabled(True)
 
+
     def toggle_password(self, event):
         if self.inputPass.echoMode() == QLineEdit.Password:
             self.inputPass.setEchoMode(QLineEdit.Normal)

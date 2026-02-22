@@ -8,4 +8,4 @@ test.py
 #pycache
 __pycache__/
 *.py[cod]
-
+src/Db/fastpass.db
