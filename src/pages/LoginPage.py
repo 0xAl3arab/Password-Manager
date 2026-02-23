@@ -12,8 +12,8 @@ BUTTON_HEIGHT = 30
 class LoginPage(QMainWindow):
 
     #-----------Signals----------
-    create_account_signal= pyqtSignal()    
-
+    create_account_signal= pyqtSignal()
+    login_button_signal = pyqtSignal()    
 
     def __init__(self):
         super().__init__()
@@ -32,11 +32,11 @@ class LoginPage(QMainWindow):
         form_widget.setLayout(form_layout)
 
         # Username row
-        username_input = QLineEdit()
-        username_input.setFixedSize(INPUT_WIDTH, INPUT_HEIGHT)
+        self.username_input = QLineEdit()
+        self.username_input.setFixedSize(INPUT_WIDTH, INPUT_HEIGHT)
         username_widget = QWidget()
         username_layout = QHBoxLayout()
-        username_layout.addWidget(username_input, alignment=Qt.AlignLeft)
+        username_layout.addWidget(self.username_input, alignment=Qt.AlignLeft)
         username_widget.setLayout(username_layout)
         form_layout.addRow("Username:", username_widget)
         username_layout.setContentsMargins(0,0,0,0)
@@ -87,14 +87,22 @@ class LoginPage(QMainWindow):
         
 
         # Login button row
-        login_button = QPushButton("Login")
-        login_button.setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT)
+        self.login_button = QPushButton("Login")
+        self.login_button.setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT)
+        self.login_button.clicked.connect(self.login_button_clicked)
         login_widget = QWidget()
         login_layout = QHBoxLayout()
-        login_layout.addWidget(login_button, alignment=Qt.AlignHCenter)
+        login_layout.addWidget(self.login_button, alignment=Qt.AlignHCenter)
         login_layout.setContentsMargins(0,0,0,0)
         login_widget.setLayout(login_layout)
         form_layout.addRow(login_widget)
+
+        # Status message row (errors/success etc...)
+        self.message_label = QLabel()
+        self.message_label.setAlignment(Qt.AlignCenter)
+        self.message_label.setContentsMargins(0,10,0,10)
+        form_layout.addRow(self.message_label)
+        
 
         # Add form to main layout and center
         main_layout.addStretch()
@@ -113,6 +121,10 @@ class LoginPage(QMainWindow):
 
     def create_account_clicked(self):
         self.create_account_signal.emit()
+    
+    def login_button_clicked(self):
+        self.login_button_signal.emit()
+
 
 
 
