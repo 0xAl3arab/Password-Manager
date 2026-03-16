@@ -1,12 +1,11 @@
 import sys
-import time
 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QCheckBox, QPushButton
 from PyQt5.QtCore import Qt ,QTimer
 from PyQt5.QtGui import QPixmap
 import Db.DbConnection as Db
-from pages.LoginPage import LoginPage
+from Ui.LoginPage import LoginPage
 import bcrypt
 dbconn = Db.DbConnection()
 

@@ -1,8 +1,6 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QFormLayout, QLineEdit, QVBoxLayout, QHBoxLayout, QLabel , QStackedWidget
-from PyQt5.QtCore import QSize, Qt 
-import sys
-from pages.LoginPage import LoginPage
-from pages.SignUpPage import SignUpPage
+from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget
+from Ui.LoginPage import LoginPage
+from Service import SignUpPage
 import sqlite3
 import bcrypt
 

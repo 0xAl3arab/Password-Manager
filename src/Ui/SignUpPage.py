@@ -1,12 +1,11 @@
 import sys
-import time
 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QCheckBox, QPushButton
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QPixmap
 import Db.DbConnection as Db
-from pages.LoginPage import LoginPage
+from Ui.LoginPage import LoginPage
 from Service.SignUp import SignUp
 
 dbconn = Db.DbConnection()
@@ -85,11 +84,13 @@ class SignUpPage(QMainWindow):
         eye = QPixmap("../../Assets/eye-password-show.svg")
         self.show_hidePass.setPixmap(eye)
         self.show_hidePass.setScaledContents(True)
+        self.show_hidePass.setCursor(Qt.PointingHandCursor)
 
         self.show_hidePassCr = QLabel(self)
         self.show_hidePassCr.setGeometry(400, 295, 20, 20)
         self.show_hidePassCr.setPixmap(eye)
         self.show_hidePassCr.setScaledContents(True)
+        self.show_hidePassCr.setCursor(Qt.PointingHandCursor)
         self.show_hidePass.mousePressEvent = self.toggle_password
         self.show_hidePassCr.mousePressEvent = self.toggle_password_confirm
 
@@ -126,6 +127,7 @@ class SignUpPage(QMainWindow):
     def checked(self, state):
         if state == Qt.Checked:
             self.submitbutton.setDisabled(False)
+
         else:
             self.submitbutton.setDisabled(True)
 
