@@ -19,7 +19,6 @@ class LoginPage(QMainWindow):
         super().__init__()
         self.setWindowTitle("Login")
         self.setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT)
-
         # Central widget and main layout
         central_widget = QWidget()
         self.setCentralWidget(central_widget)

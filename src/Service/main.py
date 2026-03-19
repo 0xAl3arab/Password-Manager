@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget
 from Ui.LoginPage import LoginPage
-from Service import SignUpPage
+from Ui.SignUpPage import SignUpPage
 import sqlite3
 import bcrypt
 
@@ -9,21 +9,9 @@ class MainPage(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.central_stacked_widget = QStackedWidget()
-        self.setCentralWidget(self.central_stacked_widget)
-
         self.loginPage = LoginPage()
         self.signUpPage = SignUpPage()
-
-        #add the two pages to the central widget which is the container
-        self.central_stacked_widget.addWidget(self.loginPage)
-        self.central_stacked_widget.addWidget(self.signUpPage)
-
-        #show the login page on startup always
-        self.central_stacked_widget.setCurrentWidget(self.loginPage)
-
-
-
+        self.loginPage.show()  # Show login first
         self.connect_signals()
 
     def connect_signals(self):
@@ -62,11 +50,10 @@ class MainPage(QMainWindow):
         self.loginPage.message_label.setText("Username or password incorrect")
         return False
         #handle password incorrect
-        
-
 
     def showSignUpPage(self):
-        self.central_stacked_widget.setCurrentWidget(self.signUpPage)
+        self.loginPage.hide()
+        self.signUpPage.show()
     
     
 
@@ -76,5 +63,4 @@ class MainPage(QMainWindow):
 
 app = QApplication([])
 window = MainPage()
-window.show()
 app.exec()

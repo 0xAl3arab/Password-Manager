@@ -127,7 +127,7 @@ class SignUpPage(QMainWindow):
     def checked(self, state):
         if state == Qt.Checked:
             self.submitbutton.setDisabled(False)
-
+            self.submitbutton.setCursor(Qt.PointingHandCursor)
         else:
             self.submitbutton.setDisabled(True)
 
