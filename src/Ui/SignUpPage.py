@@ -18,7 +18,7 @@ class SignUpPage(QMainWindow):
         self.sign_up_service = SignUp()
         self.setWindowTitle("FastPass - SignUp")
         self.setGeometry(700, 300, 500, 500)
-        self.setWindowIcon(QIcon('../../Assets/1849-logo-1713617130.076color-00a3e4.svg'))
+        self.setWindowIcon(QIcon('../../Assets/FastPassLogo.svg'))
         self.setFixedSize(500, 500)
         label = QLabel("Sign Up", self)
         label.setGeometry(0, 90, 500, 500)
@@ -30,7 +30,7 @@ class SignUpPage(QMainWindow):
                             "font-style:italic;")
         logolabel = QLabel(self)
         logolabel.setGeometry(100, 0, 90, 90)
-        logo = QPixmap("../../Assets/1849-logo-1713617130.076color-00a3e4.svg")
+        logo = QPixmap("../../Assets/FastPassLogo.svg")
         logolabel.setPixmap(logo)
         logolabel.setScaledContents(True)
 
